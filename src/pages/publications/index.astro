@@ -1,0 +1,68 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+type Pub = {
+  year: number;
+  title: string;
+  authors: string;
+  venue: string;
+  tags?: string[];
+  links?: { label: string; href: string }[];
+};
+
+const publications: Pub[] = [
+  {
+    year: 2026,
+    title: 'Placeholder Paper Title Goes Here',
+    authors: 'J. Q. Engineer, A. Coauthor, B. Coauthor',
+    venue: 'Name of Conference or Journal, 2026',
+    tags: ['journal'],
+    links: [
+      { label: 'PDF', href: '#' },
+      { label: 'Code', href: '#' },
+    ],
+  },
+  {
+    year: 2025,
+    title: 'Another Placeholder Paper Title',
+    authors: 'J. Q. Engineer, C. Coauthor',
+    venue: 'Name of Conference, 2025',
+    tags: ['conference'],
+    links: [{ label: 'PDF', href: '#' }],
+  },
+];
+
+const byYear = publications.reduce<Record<number, Pub[]>>((acc, pub) => {
+  (acc[pub.year] ??= []).push(pub);
+  return acc;
+}, {});
+const years = Object.keys(byYear).map(Number).sort((a, b) => b - a);
+---
+
+<BaseLayout title="Publications | Jane Q. Engineer">
+  <h1>Publications</h1>
+  <p>
+    Also see my <a href="https://scholar.google.com/">Google Scholar</a>
+    profile for a complete, auto-updating list.
+  </p>
+
+  {years.map((year) => (
+    <section>
+      <h2>{year}</h2>
+      <ul class="pub-list">
+        {byYear[year].map((pub) => (
+          <li>
+            <div>{pub.title}</div>
+            <div class="pub-venue">{pub.authors} &mdash; {pub.venue}</div>
+            {pub.tags && pub.tags.map((t) => <span class="tag">{t}</span>)}
+            {pub.links && pub.links.map((link) => (
+              <>
+                {' '}<a href={link.href}>{link.label}</a>
+              </>
+            ))}
+          </li>
+        ))}
+      </ul>
+    </section>
+  ))}
+</BaseLayout>

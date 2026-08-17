@@ -1,0 +1,41 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const areas = [
+  {
+    title: '[Research Area One]',
+    body: 'One paragraph describing this research thread: the problem, your approach, and why it matters.',
+  },
+  {
+    title: '[Research Area Two]',
+    body: 'One paragraph describing this research thread: the problem, your approach, and why it matters.',
+  },
+  {
+    title: '[Research Area Three]',
+    body: 'One paragraph describing this research thread: the problem, your approach, and why it matters.',
+  },
+];
+---
+
+<BaseLayout title="Research | Jane Q. Engineer">
+  <h1>Research</h1>
+  <p>
+    Overview paragraph: describe your lab's mission and the through-line
+    connecting your research areas below.
+  </p>
+
+  {areas.map((area) => (
+    <section>
+      <h2>{area.title}</h2>
+      <p>{area.body}</p>
+    </section>
+  ))}
+
+  <section>
+    <h2>Openings</h2>
+    <p>
+      [Optional: note whether you're recruiting PhD students, postdocs, or
+      undergraduate researchers, and how to reach out.]
+    </p>
+  </section>
+</BaseLayout>

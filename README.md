@@ -1,5 +1,3 @@
-# jasonschnitzer.github.io
-Academic site for Jason Schnitzer
 # academic-site
 
 A minimal Astro site for an engineering academic's personal/lab page, built
