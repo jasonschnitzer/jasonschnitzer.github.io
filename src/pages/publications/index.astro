@@ -1,86 +1,14 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
+import BaseListing from "../../layouts/BaseListing.astro";
+import { PAGES } from "../../config";
 
-type Pub = {
-  year: number;
-  title: string;
-  authors: string;
-  venue: string;
-  tags?: string[];
-};
-
-// NOTE: co-author lists below are filled in only where confirmed (see
-// research-profile-notes.md). Double-check exact author order/names for
-// the TNSM, NOMS, and IFIP/IEEE entries before this goes live.
-const publications: Pub[] = [
-  {
-    year: 2026,
-    title: 'Broadband After BEAD: The Emerging Policy Challenge of Network Availability',
-    authors: 'D. Reed, J. Schnitzer',
-    venue: 'Presented at TPRC 54 (Telecommunications Policy Research Conference), Sept 26, 2026',
-    tags: ['policy', 'upcoming talk'],
-  },
-  {
-    year: 2026,
-    title: 'Autonomic DOCSIS Networking',
-    authors: 'J. Schnitzer',
-    venue: 'Ph.D. Dissertation, University of Colorado Boulder. Advised by Sangtae Ha.',
-    tags: ['dissertation'],
-  },
-  {
-    year: 2026,
-    title: 'A Comparison of Latency Reduction Mechanisms for Mobile Backhaul over DOCSIS Networks',
-    authors: 'J. Schnitzer, et al.',
-    venue: 'IEEE NOMS 2026',
-    tags: ['conference'],
-  },
-  {
-    year: 2025,
-    title: 'The Continuum of DOCSIS Network Management: Tracing the Path to Programmability',
-    authors: 'J. Schnitzer, et al.',
-    venue: 'IEEE Transactions on Network and Service Management (TNSM) — under revision',
-    tags: ['journal', 'in revision'],
-  },
-  {
-    year: 2024,
-    title: 'Where Has the Time Gone? Examining Over a Decade of Broadband Latency Measurements',
-    authors: 'J. Schnitzer, et al.',
-    venue: 'IFIP/IEEE (2024)',
-    tags: ['measurement'],
-  },
-];
-
-const byYear = publications.reduce<Record<number, Pub[]>>((acc, pub) => {
-  (acc[pub.year] ??= []).push(pub);
-  return acc;
-}, {});
-const years = Object.keys(byYear).map(Number).sort((a, b) => b - a);
+if (PAGES.publications.isActive === false) {
+    return Astro.redirect("/404");
+}
 ---
 
-<BaseLayout title="Publications | Jason Schnitzer">
-  <h1>Publications</h1>
-  <p>
-    Also see my <a href="https://scholar.google.com/">Google Scholar</a> profile
-    for a complete, auto-updating list.
-  </p>
-
-  {years.map((year) => (
-    <section>
-      <h2>{year}</h2>
-      <ul class="pub-list">
-        {byYear[year].map((pub) => (
-          <li>
-            <div>{pub.title}</div>
-            <div class="pub-venue">{pub.authors} &mdash; {pub.venue}</div>
-            {pub.tags && pub.tags.map((t) => <span class="tag">{t}</span>)}
-          </li>
-        ))}
-      </ul>
-    </section>
-  ))}
-
-  <p class="callout">
-    Author lists above marked "et al." are placeholders — confirm exact
-    co-author names and order before treating this page as final.
-  </p>
-</BaseLayout>
+<BaseListing
+    collection="publications"
+    title={PAGES.publications.title}
+    subtitle={PAGES.publications.subtitle}
+/>

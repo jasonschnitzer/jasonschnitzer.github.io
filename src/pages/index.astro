@@ -1,57 +1,31 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
+import { getEntry, render } from "astro:content";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { PAGES } from "../config";
 
-const news = [
-  {
-    date: 'Sept 26, 2026',
-    text: 'Presenting "Broadband After BEAD: The Emerging Policy Challenge of Network Availability" (with D. Reed) at TPRC 54, the Telecommunications Policy Research Conference.',
-  },
-  {
-    date: '2026',
-    text: 'Completed Ph.D. in Telecommunications at CU Boulder — dissertation: "Autonomic DOCSIS Networking," advised by Sangtae Ha.',
-  },
-];
+// Load bio content
+const bioEntry = await getEntry("bio", "bio");
+const { Content: BioContent } = bioEntry
+	? await render(bioEntry)
+	: { Content: null };
 ---
 
-<BaseLayout
-  title="Jason Schnitzer"
-  description="Senior Research Associate at CU Boulder working on autonomic network management, broadband measurement, and broadband policy."
->
-  <section>
-    <h1>Jason Schnitzer</h1>
-    <p>
-      Senior Research Associate, Department of Computer Science <br />
-      University of Colorado Boulder <br />
-      Leads the Broadband Measurement Clearinghouse (BCLEAR)
-    </p>
-    <p>
-      I work on autonomic and programmable network management, broadband
-      performance measurement, and broadband policy — mostly centered on
-      DOCSIS/HFC access networks, with an emerging focus on AI/RL-driven
-      network control and low-latency 5G/6G convergence. My Ph.D. work
-      developed closed-loop (MAPE) autonomic control for DOCSIS 4.0 access
-      networks; more recently I've been working on how broadband
-      availability and reliability get measured and defined for policy,
-      including the FCC's Measuring Broadband America program and the
-      BEAD program's network availability requirements.
-    </p>
-    <ul class="link-row">
-      <li><a href="mailto:jason@schnitzer.ca">Email</a></li>
-      <li><a href="/cv/">CV</a></li>
-      <li><a href="https://github.com/jasonschnitzer">GitHub</a></li>
-      <li><a href="https://scholar.google.com/">Google Scholar</a></li>
-    </ul>
-  </section>
-
-  <section>
-    <h2>News</h2>
-    <ul class="news-list">
-      {news.map((item) => (
-        <li>
-          <span class="news-date">{item.date}</span>
-          {item.text}
-        </li>
-      ))}
-    </ul>
-  </section>
+<BaseLayout title={PAGES.home.title}>
+	<div class="container-narrow">
+		{
+			(PAGES.home.title || PAGES.home.subtitle) && (
+				<header class="page-header">
+					{PAGES.home.title && (
+						<h1 class="page-title">{PAGES.home.title}</h1>
+					)}
+					{PAGES.home.subtitle && (
+						<p class="page-subtitle">{PAGES.home.subtitle}</p>
+					)}
+				</header>
+			)
+		}
+		<div class="prose">
+			{BioContent ? <BioContent /> : <p>Loading bio...</p>}
+		</div>
+	</div>
 </BaseLayout>

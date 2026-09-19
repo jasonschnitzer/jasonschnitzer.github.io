@@ -1,8 +1,23 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
+import remarkMath from 'remark-math';
+import rehypeKatex from 'rehype-katex';
+import sitemap from '@astrojs/sitemap';
 
-// jasonschnitzer.github.io is a "root" GitHub Pages site, so it's served
-// straight from https://jasonschnitzer.github.io/ with no base path.
+import tailwindcss from '@tailwindcss/vite';
+
+// https://astro.build/config
 export default defineConfig({
+  markdown: {
+    remarkPlugins: [remarkMath],
+    rehypePlugins: [rehypeKatex],
+  },
+  build: {
+    inlineStylesheets: 'always'
+  },
+  vite: {
+    plugins: [tailwindcss()],
+  },
   site: 'https://jasonschnitzer.github.io',
+  integrations: [sitemap()],
 });

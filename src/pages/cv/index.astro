@@ -1,32 +1,67 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getEntry, render } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Timeline from "../../components/ui/Timeline.astro";
+import { PAGES } from "../../config";
+
+if (PAGES.cv.isActive === false) {
+    return Astro.redirect("/404");
+}
+
+const cvEntry = await getEntry("cv", "cv");
+if (!cvEntry) {
+    throw new Error(
+        "CV content not found. Please ensure src/content/cv.md exists.",
+    );
+}
+
+const { Content } = await render(cvEntry);
+const { name, title, experience = [], education = [] } = cvEntry.data;
 ---
 
-<BaseLayout title="CV | Jason Schnitzer">
-  <h1>CV</h1>
-  <p>
-    <a href="/cv/cv.pdf">Download CV (PDF)</a> &mdash; replace
-    <code>public/cv/cv.pdf</code> with your actual, current CV file before
-    publishing.
-  </p>
+<BaseLayout title={PAGES.cv.title}>
+    <header class="page-header">
+        <h1 class="page-title">{PAGES.cv.title}</h1>
+        <p class="page-subtitle">{PAGES.cv.subtitle}</p>
+    </header>
 
-  <section>
-    <h2>Education</h2>
-    <ul>
-      <li>Ph.D., Telecommunications, University of Colorado Boulder, 2026 &mdash; "Autonomic DOCSIS Networking," advised by Sangtae Ha (committee: Dirk Grunwald, Eric Keller, Levi Perigo, David Reed)</li>
-    </ul>
-  </section>
+    <div class="container-narrow">
+        {
+            experience.length > 0 && (
+                <section class="section">
+                    <h2 class="section-title border-b border-border pb-2">
+                        Professional Experience
+                    </h2>
+                    <Timeline items={experience.map(exp => ({
+                        title: exp.role,
+                        subtitle: exp.institution,
+                        period: exp.period,
+                        description: exp.description
+                    }))} />
+                </section>
+            )
+        }
 
-  <section>
-    <h2>Appointments</h2>
-    <ul>
-      <li>Senior Research Associate, Department of Computer Science, University of Colorado Boulder</li>
-      <li>Lead, Broadband Measurement Clearinghouse (BCLEAR)</li>
-    </ul>
-  </section>
+        {
+            education.length > 0 && (
+                <section class="section">
+                    <h2 class="section-title border-b border-border pb-2">
+                        Education
+                    </h2>
+                    <Timeline items={education.map(edu => ({
+                        title: edu.degree,
+                        subtitle: edu.institution,
+                        period: edu.period,
+                        description: edu.description,
+                        thesis: edu.thesis
+                    }))} />
+                </section>
+            )
+        }
 
-  <section>
-    <h2>Selected Publications</h2>
-    <p>See the full <a href="/publications/">Publications</a> page.</p>
-  </section>
+        <div class="prose max-w-none">
+            <Content />
+        </div>
+    </div>
 </BaseLayout>
+
