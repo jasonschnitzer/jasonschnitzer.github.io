@@ -25,11 +25,21 @@ const currentPath = Astro.url.pathname;
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Inter+Tight:wght@600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
+    <div class="bg-glow" aria-hidden="true"></div>
     <header class="site-header">
       <div class="wrap">
-        <a class="site-title" href="/">Jason Schnitzer</a>
+        <a class="site-title" href="/">
+          <span class="site-title-mark">JS</span>
+          <span class="site-title-text">Jason Schnitzer</span>
+        </a>
         <nav class="site-nav">
           <ul>
             {nav.map((item) => (
@@ -50,7 +60,9 @@ const currentPath = Astro.url.pathname;
     </main>
     <footer class="site-footer">
       <div class="wrap">
-        &copy; {new Date().getFullYear()} Jason Schnitzer &middot; Built with Astro
+        <span>&copy; {new Date().getFullYear()} Jason Schnitzer</span>
+        <span class="footer-sep">&middot;</span>
+        <span>University of Colorado Boulder</span>
       </div>
     </footer>
   </body>
