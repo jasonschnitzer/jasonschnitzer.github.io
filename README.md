@@ -1,14 +1,14 @@
-# academic-site
+# jasonschnitzer.github.io
 
-A minimal Astro site for an engineering academic's personal/lab page, built
-to deploy on GitHub Pages at `https://YOUR-USERNAME.github.io`.
+Astro site for Jason Schnitzer's academic homepage, deployed on GitHub
+Pages at `https://jasonschnitzer.github.io`.
 
 ## Structure
 
-- `src/pages/index.astro` — home / bio
-- `src/pages/research/` — research overview
+- `src/pages/index.astro` — home / bio / news
+- `src/pages/research/` — research areas
 - `src/pages/publications/` — publications list (edit the array in `index.astro`)
-- `src/pages/cv/` — CV page; drop your real CV at `public/cv/cv.pdf`
+- `src/pages/cv/` — CV page; real CV PDF goes at `public/cv/cv.pdf`
 - `src/pages/contact/` — contact info
 - `src/layouts/BaseLayout.astro` — shared header/nav/footer
 - `src/styles/global.css` — all site styling
@@ -22,27 +22,32 @@ npm run dev
 
 Visit `http://localhost:4321`.
 
-## Before you push
+## Still open before this is truly final
 
-1. Replace `YOUR-USERNAME` in `astro.config.mjs` and in the GitHub/Scholar
-   links across the pages.
-2. Replace "Jane Q. Engineer" and all `[bracketed placeholders]` with your
-   real name, department, bio, research areas, and publications.
-3. Add your real CV PDF at `public/cv/cv.pdf`.
+- Replace `public/cv/cv.pdf` with your real, current CV.
+- Confirm exact co-author names/order on the NOMS, TNSM, and IFIP/IEEE
+  papers in `src/pages/publications/index.astro` — currently marked
+  "et al." as a placeholder pending confirmation.
+- Add a Google Scholar profile link once you have the URL (currently
+  linked generically to scholar.google.com).
 
-## Deploying to GitHub Pages
+## Updating the live site
 
-This repo already includes `.github/workflows/deploy.yml`, which builds and
-deploys the site automatically on every push to `main`.
+This repo is already live at `https://jasonschnitzer.github.io`. To push
+this update:
 
-One-time setup on GitHub:
+```sh
+cd academic-site
+git add -A
+git commit -m "Fill in real bio, research, and publications content"
+git push
+```
 
-1. Push this repo to `YOUR-USERNAME.github.io` on GitHub (see command below).
-2. In the repo, go to **Settings → Pages**.
-3. Under **Build and deployment → Source**, choose **GitHub Actions**.
-4. Push to `main` — the workflow will build and publish automatically.
-   Your site will be live at `https://YOUR-USERNAME.github.io` within a
-   minute or two.
+The existing GitHub Actions workflow (`.github/workflows/deploy.yml`)
+rebuilds and redeploys automatically on every push to `main`.
+
+If you're instead setting this up fresh in an empty
+`jasonschnitzer.github.io` repo:
 
 ```sh
 cd academic-site
@@ -50,6 +55,8 @@ git init
 git add -A
 git commit -m "Initial site"
 git branch -M main
-git remote add origin https://github.com/YOUR-USERNAME/YOUR-USERNAME.github.io.git
+git remote add origin https://github.com/jasonschnitzer/jasonschnitzer.github.io.git
 git push -u origin main
 ```
+
+Then in the repo: Settings → Pages → Source → GitHub Actions.

@@ -6,7 +6,7 @@ interface Props {
   description?: string;
 }
 
-const { title, description = 'Personal academic site.' } = Astro.props;
+const { title, description = 'Jason Schnitzer — broadband networking research, CU Boulder.' } = Astro.props;
 const nav = [
   { href: '/', label: 'Home' },
   { href: '/research/', label: 'Research' },
@@ -29,7 +29,7 @@ const currentPath = Astro.url.pathname;
   <body>
     <header class="site-header">
       <div class="wrap">
-        <a class="site-title" href="/">Jane Q. Engineer</a>
+        <a class="site-title" href="/">Jason Schnitzer</a>
         <nav class="site-nav">
           <ul>
             {nav.map((item) => (
@@ -50,7 +50,7 @@ const currentPath = Astro.url.pathname;
     </main>
     <footer class="site-footer">
       <div class="wrap">
-        &copy; {new Date().getFullYear()} Jane Q. Engineer &middot; Built with Astro
+        &copy; {new Date().getFullYear()} Jason Schnitzer &middot; Built with Astro
       </div>
     </footer>
   </body>

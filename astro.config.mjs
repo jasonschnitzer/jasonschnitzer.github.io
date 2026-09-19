@@ -1,8 +1,8 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 
-// This repo is a username.github.io "root" site, so no `base` path is needed
-// and the site is served straight from https://<username>.github.io/
+// jasonschnitzer.github.io is a "root" GitHub Pages site, so it's served
+// straight from https://jasonschnitzer.github.io/ with no base path.
 export default defineConfig({
-  site: 'https://YOUR-USERNAME.github.io',
+  site: 'https://jasonschnitzer.github.io',
 });
