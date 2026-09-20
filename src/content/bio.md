@@ -1,7 +1,7 @@
 ---
 name: "Jason Schnitzer"
 avatar: "avatar.jpg"
-shortBio: "Senior Research Associate at CU Boulder. I work on autonomic network management, broadband measurement, and broadband policy."
+shortBio: "Research Associate at CU Boulder. I work on autonomic networks, low-latency systems, broadband measurement, and policy."
 institution: "University of Colorado Boulder"
 ---
 
