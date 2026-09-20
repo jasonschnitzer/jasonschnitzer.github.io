@@ -19,8 +19,8 @@ My work sits at the intersection of network management, broadband measurement, a
 
 ## News
 
+- **Sept 30, 2026** — Presenting "The New Broadband Stack: Intent-Based Networking in the Low Latency Age" at SCTE TechExpo 2026 in Atlanta, GA.
 - **Sept 26, 2026** — Presenting "Broadband After BEAD: The Emerging Policy Challenge of Network Availability" (with D. Reed) at TPRC 54, the Telecommunications Policy Research Conference.
-- **2026** — Completed Ph.D. in Telecommunications at CU Boulder — dissertation: "Autonomic DOCSIS Networking," advised by Sangtae Ha.
 
 ## Education
 
